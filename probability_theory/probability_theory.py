@@ -1,3 +1,6 @@
+import pt_math
+import fractions
+
 # 1. Элементарная теория вероятностей: случайные величины
 
 '''
@@ -112,9 +115,35 @@ def pt_1_4_6():
 '''    
 def pt_1_4_7():
 
-    return str(450*449*448/6 + 450*449*450/2)
+    return int(
+                pt_math.combination(450,3) + 
+                pt_math.combination(450,2)*450)
+
+def pt_1_4_8():
+
+    return int(16*15*14*13*12*11*pt_math.combination(10,2))
+
+def pt_1_4_9():
+
+    # общее количество билетов
+    denominator = pt_math.combination(75,3)
+
+    # количество билетов, в которых студент не знает ни одного вопроса
+    numerator_0 = pt_math.combination(25,3)
+
+    # количество билетов, в которых студент не знает один вопрос
+    numerator_1 = pt_math.combination(25,2)*50
+
+    # вероятность неблагооприятного исхода
+    probability_negative = fractions.simple_fraction(numerator_0 + numerator_1, denominator)
+
+    # вероятность благоприятного исхода
+    probability_negative.numerator = probability_negative.numerator * (-1)
+    probability = fractions.sum(1, probability_negative)
+    
+    return probability.to_string()
 
 # 2. Элементарная теория вероятностей: случайные события
 
-print(pt_1_4_7())
+print(pt_1_4_9())
 input()

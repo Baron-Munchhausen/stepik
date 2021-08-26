@@ -63,3 +63,11 @@ def sum(a, b):
     
     return result
 
+def diff(a, b):
+
+    if type(b) is int:
+        b = b * (-1)
+    else:
+        b.numerator = b.numerator * (-1)
+
+    return sum(a, b)

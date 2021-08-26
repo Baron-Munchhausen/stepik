@@ -4,7 +4,7 @@ def combination(n,k):
 
     numerator, denominator = 1, 1
     
-    if k < n/2:
+    if k <= n/2:
         for i in range(n-k, n):
             numerator = numerator*(i+1)
             denominator = denominator*(n-i)

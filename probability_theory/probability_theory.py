@@ -1,5 +1,4 @@
 import pt_math
-import fractions
 
 # 1. Элементарная теория вероятностей: случайные величины
 
@@ -107,8 +106,8 @@ def pt_1_4_6():
     numerator = b*(b-1) + w*(w-1)
     denominator = (b+w)*(b+w-1)
 
-    probability_1 = fractions.simple_fraction(numerator, denominator)
-    probability_2 = fractions.diff(1, fractions.simple_fraction(numerator, denominator))
+    probability_1 = pt_math.simple_fraction(numerator, denominator)
+    probability_2 = pt_math.diff(1, pt_math.simple_fraction(numerator, denominator))
 
     return probability_1.to_string() + ', ' + probability_2.to_string()
 
@@ -151,10 +150,10 @@ def pt_1_4_9():
     numerator_1 = pt_math.combination(25,2)*50
 
     # вероятность неблагооприятного исхода
-    probability_negative = fractions.simple_fraction(numerator_0 + numerator_1, denominator)
+    probability_negative = pt_math.simple_fraction(numerator_0 + numerator_1, denominator)
 
     # вероятность благоприятного исхода
-    probability = fractions.diff(1, probability_negative)
+    probability = pt_math.diff(1, probability_negative)
     
     return probability.to_string()
 
@@ -194,21 +193,73 @@ def pt_1_4_11():
    combination_3 = pt_math.combination(52,6)
 
    # вероятность выбрать по три карты двух мастей
-   probability = fractions.simple_fraction(combination_1 * combination_1 * combination_2, combination_3)
+   probability = pt_math.simple_fraction(combination_1 * combination_1 * combination_2, combination_3)
 
    # количество комбинаций, где одна или две карты бубновые, или ни одной
    combination_4 = pt_math.combination(13,1) * pt_math.combination(39,5) + pt_math.combination(13,2) * pt_math.combination(39,4) + pt_math.combination(39,6)
 
    # вероятность, что одна или две карты бубновые
-   probability_2 = fractions.simple_fraction(combination_4, combination_3)
+   probability_2 = pt_math.simple_fraction(combination_4, combination_3)
 
    return probability.to_string() + ', ' + probability_2.to_string()
 
 def pt_1_5_3():
 
+    probability = pt_math.simple_fraction(11 * 10 * 9 , 30 * 29 * 28)
 
+    return probability.to_string()
 
-    return ''
+def pt_1_5_4():
+
+    '''
+    По определению P(A|B) = P(A и B)/P(B)
+
+    Количество перестановок из четырех человека - 4! = 24
+
+    1. P(A и B) = 2!/4!, P(B) = 3!/4! => P(A|B) = 1/3
+    2. P(A и B) = 3!/4!, P(B) = (4! - 3!)/4! => P(A|B) = 1/3
+    3. P(A и B) = (2!/4!)*2, P(B) = (4! - 3!)/4! => P(A|B) = 2/9
+    4. P(A и B) = 3!/4!, P(B) = (6+4+2)/12 => P(A|B) = 1/2
+    5. P(A и B) = 8/4!, P(B) = 1/2 => P(A|B) = 2/3
+    '''
+    
+    return '1/3, 1/3, 2/9, 1/2, 2/3'
+
+def pt_1_5_6():
+
+    '''
+    P(A|B) = P(A и B)/P(B)
+
+    P(A и B) = (5/6)*(1/6)
+    P(B) = (5/6)*(1/6) + (5/6)*(5/6)*(5/6)*(1/6) + (5/6)*(5/6)*(5/6)*(5/6)*(5/6)*(1/6) - т.е. сумма бесконечно убывающей 
+    геометрической прогрессии, где p1 = (5/6)*(1/6), а q = 25/36
+
+    P(B)=b1/(1-q)
+
+    P(A|B) = 11/36
+
+    '''
+
+    return '11/36'
+
+def pt_1_6_4():
+
+    '''
+    P(А) вторую кость можно приставить по правилам домино
+    P(B1) выпал дубль
+    P(B2) выпал не дубль
+
+    P(A) = P(A|B1)*P(B1) + P(A|B2)*P(B2)
+    P(B1) = 1/4
+    P(B2) = 3/4
+    P(A|B1) = 6/27
+    P(A|B2) = 12/27
+    '''
+
+    probability_1 = pt_math.simple_fraction(1 * 6, 4 * 27)
+    probability_2 = pt_math.simple_fraction(3 * 12, 4 * 27) 
+    
+    return pt_math.sum(probability_1, probability_2).to_string()
 
 
 # 2. Элементарная теория вероятностей: случайные события
